@@ -1,21 +1,10 @@
 <template>
-	<div>
+	<div style="margin-top: 30px;">
 		<el-row :gutter="20" >
-			<el-col :span="6"  :class="{'selected': choose[0]}" @click.native="change" data-num="0">
-				<p class="num"  >{{n.robotNum}}</p>
-				<p>机器人回话数</p>
-			</el-col>
-			<el-col :span="6" :class="{'selected': choose[1]}" @click.native="change" data-num="1">
-				<p class="num"> {{n.personNum}}</p>
-				<p>人工会话数</p>
-			</el-col>
-			<el-col :span="6" :class="{'selected': choose[2]}" @click.native="change" data-num="2">
-				<p class="num">{{n.waitNum}}</p>
-				<p>排队人数</p>
-			</el-col>
-			<el-col :span="6" :class="{'selected': choose[3]}" @click.native="change" data-num="3">
-				<p class="num">{{n.onlineNum}}</p>
-				<p>在线客服人数1</p>
+			<el-col :span="6" v-for="(item,index) in items" :item="item" :index="index" :key="item.key"
+				:class="{selected:choose[index]}" @click.native="change(index)">
+				<p>{{item.text}}</p>
+				<p>{{item.num}}</p>
 			</el-col>
 		</el-row>
 		<p>当前在线接待概况</p>
@@ -39,7 +28,13 @@
 <script>
 	export default {
 		data() {
-			return {
+			return { 
+				items: [
+					{num: 123,text:'机器人回话数',key: _.uniqueId('work_')},
+					{num: 123,text:'人工会话数',key: _.uniqueId('work_')},
+					{num: 123,text:'排队人数',key: _.uniqueId('work_')},
+					{num: 123,text:'在线客服人数',key: _.uniqueId('work_')},
+				],
 				n: {
 					robotNum: 123,
 					personNum: 123,
@@ -71,13 +66,10 @@
 			}
 		},
 		methods: {
-			change(e){
-				let target = e.currentTarget;
+			change(index){
 				// this.choose.fill(false);  不会触发更新
 				this.choose = [false, false, false, false]
-				this.choose[target.getAttribute('data-num')] = true;
-				console.log(this.choose);
-				// target.
+				this.choose[index] = true;
 			}
 		}
 	}

@@ -12,6 +12,7 @@ import Page6 from './views/nav3/Page6.vue'
 import echarts from './views/charts/echarts.vue'
 import WorkOrder from './views/nav1/WorkOrder.vue'
 import OnlineService from './views/nav1/OnlineService.vue'
+import MyReception from './views/nav1/MyReception.vue'
 
 let routes = [
 {
@@ -41,7 +42,7 @@ let routes = [
   children: [// 匹配到的路由会更新到  Home  组件  中的   route-view中
   { path: '/main', component: Main, name: '主页', hidden: true },
   { path: '/work-order', component: WorkOrder, name: '我的工单' },
-  { path: '/reception', component: Form, name: '我的接待' },
+  { path: '/reception', component: MyReception, name: '我的接待' },
   { path: '/online-customer-service-overview', component: OnlineService, name: '在线客服概况' },
   ]
 },
