@@ -30,7 +30,7 @@ router.beforeEach((to, from, next) => {
     sessionStorage.removeItem('user');
   }
   let user = JSON.parse(sessionStorage.getItem('user'));
-  if (!user && to.path != '/login') {
+  if (!user && to.path != '/login' && to.path != '/register') {
     next({ path: '/login' })
   } else {
     next()
@@ -41,12 +41,12 @@ router.beforeEach((to, from, next) => {
 //NProgress.done();
 //});
 
-new Vue({
+window.a = new Vue({
   //el: '#app',
   //template: '<App/>',
   router,
   store,
-  //components: { App }
+  // components: { App }
   render: h => h(App)
 }).$mount('#app')
 

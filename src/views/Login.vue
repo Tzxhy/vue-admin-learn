@@ -1,15 +1,20 @@
 <template>
   <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-position="left" label-width="0px" class="demo-ruleForm login-container">
-    <h3 class="title">系统登录</h3>
+    <h3 class="title">登录蓝欧克服,开启智慧克服新篇章</h3>
     <el-form-item prop="account">
-      <el-input type="text" v-model="ruleForm2.account" auto-complete="off" placeholder="账号"></el-input>
+      <el-input type="text" v-model="ruleForm2.account" auto-complete="off" placeholder="请输入您在注册时的邮箱帐号"></el-input>
     </el-form-item>
     <el-form-item prop="checkPass">
-      <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off" placeholder="密码"></el-input>
+      <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off" placeholder="请输入登录密码"></el-input>
     </el-form-item>
+
     <el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox>
+
+
     <el-form-item style="width:100%;">
       <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit2" :loading="logining">登录</el-button>
+      <span>还没有账号?</span>
+      <el-button @click="register" type="text">立即注册</el-button>
       <!--<el-button @click.native.prevent="handleReset2">重置</el-button>-->
     </el-form-item>
   </el-form>
@@ -62,7 +67,7 @@
                 });
               } else {
                 sessionStorage.setItem('user', JSON.stringify(user));
-                this.$router.push({ path: '/table' });
+                this.$router.push({ path: '/work-order' });
               }
             });
           } else {
@@ -70,6 +75,9 @@
             return false;
           }
         });
+      },
+      register(){
+        this.$router.push({ path: '/register' });
       }
     }
   }

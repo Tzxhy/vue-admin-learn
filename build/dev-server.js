@@ -6,6 +6,7 @@ if (!process.env.NODE_ENV) {
 }
 
 var opn = require('opn')
+// https://www.npmjs.com/package/opn opn can open the default browser
 var path = require('path')
 var express = require('express')
 var webpack = require('webpack')

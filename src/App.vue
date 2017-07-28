@@ -16,7 +16,7 @@ export default {
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 body {
 	margin: 0px;
 	padding: 0px;
@@ -26,6 +26,8 @@ body {
 	font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif;
 	font-size: 14px;
 	-webkit-font-smoothing: antialiased;
+	width: 100%;
+	overflow: hidden;
 }
 
 #app {
