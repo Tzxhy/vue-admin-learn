@@ -9,10 +9,10 @@
 					:value="item.value">
 				</el-option>
 			</el-select>
-		</div>
-		<el-row  class="text-center">
+		</div> 
+		<el-row  class="text-center" :gutter="10">
 			<el-col :span="4" v-for="(item,index) in items" :item="item" :index="index" :key	="item.key"
-				:class="{selected:choose[index]}" @click.native="change(index)">
+				:class="{selected:choose[index]}">
 				<p>{{item.text}}</p>
 				<p>{{item.num}}</p>
 			</el-col>
@@ -81,11 +81,12 @@ var echarts = require('echarts');
 				searchValue: '',
 				choose: [true, false, false, false],
 				items:[
-				{num: 123, text: "正在咨询人数",key: _.uniqueId('work_') },
-				{num: 223, text: "正在排队人数",key: _.uniqueId('work_') },
-				{num: 333, text: "今日会话量",key: _.uniqueId('work_') },
-				{num: 444, text: "今日未接入会话量",key: _.uniqueId('work_') },
-				{num: 444, text: "今日相对满意度",key: _.uniqueId('work_') },
+				{num: 123, text: "总会话量",key: _.uniqueId('work_') },
+				{num: 223, text: "总消息量",key: _.uniqueId('work_') },
+				{num: 333, text: "平均会话时长",key: _.uniqueId('work_') },
+				{num: 444, text: "相对满意度",key: _.uniqueId('work_') },
+				{num: 444, text: "排队量",key: _.uniqueId('work_') },
+				{num: 444, text: "未接入会话量",key: _.uniqueId('work_') },
 				],
 				options: [
 					{value: 'a',label: '选项A', key: _.uniqueId('select_')}
@@ -282,14 +283,10 @@ var echarts = require('echarts');
 	}
 	.el-col-4 {
 		text-align: center;
-		cursor: pointer;
 		background-color: #fff;
-		border-radius: 5px;
-		padding-top: 10px;
-		padding-bottom: 10px;
-		&.selected {
-			background-color: #09aeb0;
-		}
+		padding: 10px 0;
+		outline:2px solid #ccc;
+		outline-offset:-5px;
 		p {
 			width: auto;
 			margin: 10px auto;
