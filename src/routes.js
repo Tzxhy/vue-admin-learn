@@ -19,6 +19,11 @@ import WorkRobot from './views/nav2/WorkRobot.vue'
 import HistorySession from './views/nav3/HistorySession.vue'
 import AllPerson from './views/nav4/AllPerson.vue'
 import Group from './views/nav4/Group.vue'
+import IntellenceLib from './views/nav5/IntellenceLib.vue'
+import IntellenceRela from './views/nav5/IntellenceRela.vue'
+import IntellenceStudy from './views/nav5/IntellenceStudy.vue'
+import IntellenceTotal from './views/nav5/IntellenceTotal.vue'
+import CopyInfo from './views/nav6/CopyInfo.vue'
 
 
 let routes = [
@@ -91,19 +96,20 @@ let routes = [
   name: '知识库',
   iconCls: 'fa fa-bar-chart',
   children: [
-  // { path: '/intellence-lib', component: IntellenceLib, name: '知识库' },
-  // { path: '/intellence-rela', component: IntellenceRela, name: '相似词库' },
-  // { path: '/intellence-study', component: IntellenceRela, name: '问题学习' },
-  // { path: '/intellence-total', component: IntellenceRela, name: '问题统计' },
+  { path: '/intellence-lib', component: IntellenceLib, name: '知识库' },
+  { path: '/intellence-rela', component: IntellenceRela, name: '相似词库' },
+  { path: '/intellence-study', component: IntellenceStudy, name: '问题学习' },
+  { path: '/intellence-total', component: IntellenceTotal, name: '问题统计' },
   ]
 },{
   path: '/',
   component: Home,
-  name: '企业账号',
+  name: '企业账户管理',
   iconCls: 'fa fa-bar-chart',
+  leaf: true,
   children: [
-  { path: '/customer-list', component: echarts1, name: '客户列表' },
-  { path: '/copy-list', component: echarts1, name: '公司列表' },
+  { path: '/customer-list', component: CopyInfo, name: '企业账户管理' },
+  // { path: '/copy-list', component: echarts1, name: '公司列表' },
   ]
 },{
   path: '/',
