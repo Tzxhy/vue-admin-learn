@@ -1,7 +1,7 @@
 <template>
 	<div style="margin-top: 30px;">
 		<h3>企业账户信息</h3>
-		<el-form ref="form" :model="form" label-width="80px" style="width: 500px;">
+		<el-form ref="form" :model="form" style="width: 500px;" label-width="100px" label-position="left">
   		<el-form-item label="活动名称">
     		<el-input v-model="form.name"></el-input>
     	</el-form-item>
@@ -11,7 +11,57 @@
     	<el-form-item label="登录域名">
     		<span>{{form.domain}}</span>
     	</el-form-item>
+    	<el-form-item label="企业联系人">
+    		<el-input v-model="form.contact"></el-input>
+    	</el-form-item>
+    	<el-form-item label="手机">
+    		<el-input v-model="form.phone"></el-input>
+    	</el-form-item>
+    	<el-form-item label="邮箱">
+    		<el-input v-model="form.email"></el-input>
+    	</el-form-item>
+    	<el-button
+    		type="primary" style="width: 500px;">保存</el-button>
     </el-form>
+    <h3>当前服务模式</h3>
+		<div>
+			<h5 class="header">预付费金额</h5>
+			<el-row>
+				<el-col :span="3">当前剩余:</el-col>
+				<el-col :span="3" :offset="3">{{serviceMode.left}}</el-col>
+			</el-row>
+			<el-row style="margin-bottom:0;">
+				<el-col :span="3">
+					<h5 class="header">在线坐席套餐</h5>
+				</el-col>
+				<el-col :span="3" :offset="3">
+					<h5 class="header">{{serviceMode.type}}</h5>
+				</el-col>
+			</el-row>
+			<el-row>
+				<el-col :span="3">状态:</el-col>
+				<el-col :span="3" :offset="3">{{serviceMode.state}}</el-col>
+			</el-row>
+			<el-row>
+				<el-col :span="3">坐席数:</el-col>
+				<el-col :span="3" :offset="3">{{serviceMode.num}}个</el-col>
+			</el-row>
+			<h5>呼叫坐席套餐</h5>
+			<el-row>
+				<el-col :span="3">状态:</el-col>
+				<el-col :span="3" :offset="3">{{serviceMode.state1}}</el-col>
+			</el-row>
+			<h5>多功能坐席套餐</h5>
+			<el-row>
+				<el-col :span="3">状态:</el-col>
+				<el-col :span="3" :offset="3">{{serviceMode.state2}}</el-col>
+			</el-row>
+			<h5>智能机器人</h5>
+			<el-row>
+				<el-col :span="3">状态:</el-col>
+				<el-col :span="3" :offset="3">{{serviceMode.state3}}</el-col>
+			</el-row>
+		</div>
 	</div>
 </template>
 
@@ -26,7 +76,20 @@ export default {
 			form: {
 				name:'校企合作中心',
 				account: 'swjtu',
-				domain: 'yuming'
+				domain: 'yuming',
+				contact: '超级管理员',
+				phone: '15528016562',
+				email: 'swjtu_zhangks@163.com',
+				
+			},
+			serviceMode: {
+				left: 20,
+				type: '免费版',
+				state: '永久开通',
+				num: '2',
+				state1: '未开通',
+				state2: '未开通',
+				state3: '未开通',
 			},
 			value4:'',
 			searchValue: '',
