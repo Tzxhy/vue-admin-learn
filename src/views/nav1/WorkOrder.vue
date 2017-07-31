@@ -10,15 +10,15 @@
 				</el-option>
 			</el-select>
 		</div>
-		<el-row  class="text-center">
+		<el-row  class="text-center" style="display:flex;justify-content:space-between;">
 			<el-col :span="4" v-for="(item,index) in items" :item="item" :index="index" :key	="item.key"
-				:class="{selected:choose[index]}" @click.native="change(index)">
+				:class="{selected:choose[index]}">
 				<p>{{item.text}}</p>
 				<p>{{item.num}}</p>
 			</el-col>
 		</el-row>
 		<!-- {{drawEcharts()}} -->
-		<div id="echarts1" style="width: 500px;height: 600px;"></div>
+		<div id="echarts1" style="width: 800px;height: 600px;"></div>
 		<div>
 			<p style="display: inline-block;">今日客服活动</p>
 			<el-input	placeholder="输入客服姓名搜索"
@@ -88,7 +88,9 @@ var echarts = require('echarts');
 				{num: 444, text: "今日相对满意度",key: _.uniqueId('work_') },
 				],
 				options: [
-					{value: 'a',label: '选项A', key: _.uniqueId('select_')}
+					{value: 'a',label: '所有客服组', key: _.uniqueId('select_')},
+					{value: 'b',label: '售前组', key: _.uniqueId('select_')},
+					{value: 'c',label: '售后组', key: _.uniqueId('select_')},
 				],
 				tableData1: [
 					{servicer:'tzx','online-state': '在线','now-in': '12','total-session':'111','total-message':'111',
@@ -107,11 +109,7 @@ var echarts = require('echarts');
 			getUniqueKey(){
 
 			},
-			change(index){
-				// this.choose.fill(false);  不会触发更新
-				this.choose = [false, false, false, false]
-				this.choose[index] = true;
-			},
+			
 			handleIconClick(ev){
 				console.log(this.searchValue);
 			}
@@ -274,7 +272,7 @@ var echarts = require('echarts');
 
 <style lang="LESS" scoped>
 	.select-box {
-	 margin-left: 900px;
+	 text-align: right;
 
 	}
 	.el-row {
@@ -282,14 +280,10 @@ var echarts = require('echarts');
 	}
 	.el-col-4 {
 		text-align: center;
-		cursor: pointer;
 		background-color: #fff;
-		border-radius: 5px;
-		padding-top: 10px;
-		padding-bottom: 10px;
-		&.selected {
-			background-color: #09aeb0;
-		}
+		padding: 10px 0;
+		outline:2px solid #ccc;
+		outline-offset:-5px;
 		p {
 			width: auto;
 			margin: 10px auto;

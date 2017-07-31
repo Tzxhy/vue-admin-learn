@@ -1,5 +1,6 @@
 <template>
 	<div style="margin-top: 30px;">
+		<p>机器人服务数据</p>
 		<div class="select-box">
 			<el-select v-model="value4" clearable plackholder="请选择">
 				<el-option
@@ -18,26 +19,9 @@
 			</el-col>
 		</el-row>
 		<!-- {{drawEcharts()}} -->
-		<div id="echarts1" style="width: 500px;height: 600px;"></div>
-		<div>
-			<p style="display: inline-block;">会话量</p>
-			<el-input	placeholder="输入客服姓名搜索"
-			icon="search"
-			v-model="searchValue"
-			style="width: 300px; float: right;"
-			:on-icon-click="handleIconClick"></el-input>
-		</div>
-		<div id="echarts2" style="width: 500px;height: 600px;"></div>
-		<div>
-			<p style="display: inline-block;">会话量</p>
-			<el-input	placeholder="输入客服姓名搜索"
-			icon="search"
-			v-model="searchValue"
-			style="width: 300px; float: right;"
-			:on-icon-click="handleIconClick"></el-input>
-		</div>
-		<p>客户来源</p>
-		<p>暂无数据来源</p>
+		<div id="echarts1" style="width: 800px;height: 600px;"></div>
+		
+		
 	</div>
 </template>
 
@@ -58,7 +42,9 @@ var echarts = require('echarts');
 				
 				],
 				options: [
-					{value: 'a',label: '选项A', key: _.uniqueId('select_')}
+					{value: 'a',label: '昨天', key: _.uniqueId('select_')},
+					{value: 'b',label: '过去7天', key: _.uniqueId('select_')},
+					{value: 'c',label: '过去一个月', key: _.uniqueId('select_')},
 				],
 				tableData1: [
 					{servicer:'tzx','online-state': '在线','now-in': '12','total-session':'111','total-message':'111',
@@ -212,151 +198,6 @@ var echarts = require('echarts');
 					}
 					]
 				},
-				optionMap1: {
-					title: {
-						text: '提问数',
-					},
-					tooltip: {
-						trigger: 'axis'
-					},
-					legend: {
-						data:['排队量','已接入会话量','未接入会话量','会话总量'],
-						bottom: 0
-					},
-					toolbox: {
-						show: true,
-						feature: {
-							dataZoom: {
-								yAxisIndex: 'none'
-							},
-							dataView: {readOnly: false},
-							magicType: {type: ['line', 'bar']},
-							restore: {},
-							saveAsImage: {}
-						}
-					},
-					xAxis:  {
-						type: 'category',
-						boundaryGap: false,
-						data: ['周一','周二','周三','周四','周五','周六','周日']
-					},
-					yAxis: {
-						type: 'value',
-						axisLabel: {
-							formatter: '{value}'
-						}
-					},
-					series: [
-					{
-						name:'排队量',
-						type:'line',
-						data:[11, 11, 15, 13, 12, 13, 10],
-						markPoint: {
-							data: [
-							{type: 'max', name: '最大值'},
-							{type: 'min', name: '最小值'}
-							]
-						},
-						markLine: {
-							data: [
-							{type: 'average', name: '平均值'}
-							]
-						}
-					},
-					{
-						name:'已接入会话量',
-						type:'line',
-						data:[1, 2, 2, 5, 3, 2, 0],
-						markPoint: {
-							data: [
-							{name: '周最低', value: -2, xAxis: 1, yAxis: -1.5}
-							]
-						},
-						markLine: {
-							data: [
-							{type: 'average', name: '平均值'},
-							[{
-								symbol: 'none',
-								x: '90%',
-								yAxis: 'max'
-							}, {
-								symbol: 'circle',
-								label: {
-									normal: {
-										position: 'start',
-										formatter: '最大值'
-									}
-								},
-								type: 'max',
-								name: '最高点'
-							}]
-							]
-						}
-					},
-					{
-						name:'未接入会话量',
-						type:'line',
-						data:[5, 4, 9, 1, 2, 7, 5],
-						markPoint: {
-							data: [
-							{name: '周最低', value: -2, xAxis: 1, yAxis: -1.5}
-							]
-						},
-						markLine: {
-							data: [
-							{type: 'average', name: '平均值'},
-							[{
-								symbol: 'none',
-								x: '90%',
-								yAxis: 'max'
-							}, {
-								symbol: 'circle',
-								label: {
-									normal: {
-										position: 'start',
-										formatter: '最大值'
-									}
-								},
-								type: 'max',
-								name: '最高点'
-							}]
-							]
-						}
-					},
-					{
-						name:'会话总量',
-						type:'line',
-						data:[10, 20, 20, 15, 9, 22, 10],
-						markPoint: {
-							data: [
-							{name: '周最低', value: -2, xAxis: 1, yAxis: -1.5}
-							]
-						},
-						markLine: {
-							data: [
-							{type: 'average', name: '平均值'},
-							[{
-								symbol: 'none',
-								x: '90%',
-								yAxis: 'max'
-							}, {
-								symbol: 'circle',
-								label: {
-									normal: {
-										position: 'start',
-										formatter: '最大值'
-									}
-								},
-								type: 'max',
-								name: '最高点'
-							}]
-							]
-						}
-					}
-					]
-				}
-				
-				
 			}
 		},
 		methods: {
@@ -379,9 +220,7 @@ var echarts = require('echarts');
 			let myChart = echarts.init(document.getElementById('echarts1'));
 			
 			myChart.setOption(this.optionMap);
-			let myChart1 = echarts.init(document.getElementById('echarts2'));
 			
-			myChart1.setOption(this.optionMap1);
 		}
 	}
 

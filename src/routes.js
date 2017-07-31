@@ -9,7 +9,8 @@ import user from './views/nav1/user.vue'
 import Page4 from './views/nav2/Page4.vue'
 import Page5 from './views/nav2/Page5.vue'
 import Page6 from './views/nav3/Page6.vue'
-import echarts1 from './views/charts/echarts.vue'
+import BasicSetting from './views/nav7/BasicSetting.vue'
+import BasicChannel from './views/nav7/BasicChannel.vue'
 import WorkOrder from './views/nav1/WorkOrder.vue'
 import OnlineService from './views/nav1/OnlineService.vue'
 import MyReception from './views/nav1/MyReception.vue'
@@ -70,17 +71,17 @@ let routes = [
   { path: '/work-robot', component: WorkRobot, name: '机器人' }
   ]
 },
-{
-  path: '/',
-  component: Home,
-  name: '历史会话',
-  leaf: true,
-  iconCls: 'fa fa-address-card',
-  // leaf: true,//只有一个节点
-  children: [
-  { path: '/history-session', component: HistorySession, name: '历史会话' }
-  ]
-},
+// {
+//   path: '/',
+//   component: Home,
+//   name: '历史会话',
+//   leaf: true,
+//   iconCls: 'fa fa-address-card',
+//   // leaf: true,//只有一个节点
+//   children: [
+//   { path: '/history-session', component: HistorySession, name: '历史会话' }
+//   ]
+// },
 {
   path: '/',
   component: Home,
@@ -117,7 +118,8 @@ let routes = [
   name: '设置',
   iconCls: 'fa fa-bar-chart',
   children: [
-  { path: '/setting-page', component: echarts1, name: '对接页面' }
+  { path: '/setting-basic', component: BasicSetting, name: '基本设置' },
+  { path: '/setting-channel', component: BasicChannel, name: '支持渠道' },
   ]
 },
 {

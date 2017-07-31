@@ -10,7 +10,10 @@
 
     <el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox>
 
-
+    <el-form-item style="width:100%;">
+      <el-radio class="radio" v-model="loginType" label="1">企业管理员登陆</el-radio>
+      <el-radio class="radio" v-model="loginType" label="2">企业客服登录</el-radio>
+    </el-form-item>
     <el-form-item style="width:100%;">
       <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit2" :loading="logining">登录</el-button>
       <span>还没有账号?</span>
@@ -27,6 +30,7 @@
     data() {
       return {
         logining: false,
+        loginType: '1',
         ruleForm2: {
           account: 'admin',
           checkPass: '123456'
@@ -67,7 +71,11 @@
                 });
               } else {
                 sessionStorage.setItem('user', JSON.stringify(user));
-                this.$router.push({ path: '/work-order' });
+                if (this.loginType === '1') {
+                  this.$router.push({ path: '/work-order' });
+                }else {
+                  this.$router.push({ path: '/work-pane' });
+                }
               }
             });
           } else {

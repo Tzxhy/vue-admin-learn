@@ -1,9 +1,33 @@
 <template>
 	<div style="margin-top: 30px;">
 		<div class="select-box">
+			<el-select v-model="value1" clearable plackholder="请选择">
+				<el-option
+					v-for="item in options1"
+					:key= "item.key"
+					:label="item.label"
+					:value="item.value">
+				</el-option>
+			</el-select>
+			<el-select v-model="value2" clearable plackholder="请选择">
+				<el-option
+					v-for="item in options2"
+					:key= "item.key"
+					:label="item.label"
+					:value="item.value">
+				</el-option>
+			</el-select>
+			<el-select v-model="value3" clearable plackholder="请选择">
+				<el-option
+					v-for="item in options3"
+					:key= "item.key"
+					:label="item.label"
+					:value="item.value">
+				</el-option>
+			</el-select>
 			<el-select v-model="value4" clearable plackholder="请选择">
 				<el-option
-					v-for="item in options"
+					v-for="item in options4"
 					:key= "item.key"
 					:label="item.label"
 					:value="item.value">
@@ -18,7 +42,7 @@
 			</el-col>
 		</el-row>
 		<!-- {{drawEcharts()}} -->
-		<div id="echarts1" style="width: 500px;height: 600px;"></div>
+		<div id="echarts1" style="width: 800px;height: 600px;"></div>
 		<div>
 			<p style="display: inline-block;">今日客服活动</p>
 			<el-input	placeholder="输入客服姓名搜索"
@@ -77,6 +101,9 @@ var echarts = require('echarts');
 	export default {
 		data() {
 			return {
+				value1:'',
+				value2:'',
+				value3:'',
 				value4:'',
 				searchValue: '',
 				choose: [true, false, false, false],
@@ -88,8 +115,18 @@ var echarts = require('echarts');
 				{num: 444, text: "排队量",key: _.uniqueId('work_') },
 				{num: 444, text: "未接入会话量",key: _.uniqueId('work_') },
 				],
-				options: [
-					{value: 'a',label: '选项A', key: _.uniqueId('select_')}
+				options1: [
+					{value: 'a',label: '所有发起方', key: _.uniqueId('select_')}
+				],
+				options2: [
+					{value: 'a',label: '所有业务支流', key: _.uniqueId('select_')}
+				],
+				options3: [
+					{value: 'a',label: '所有接待客服', key: _.uniqueId('select_')}
+				],
+				options4: [
+					{value: 'a',label: '昨天', key: _.uniqueId('select_')},
+					{value: 'a',label: '过去7天', key: _.uniqueId('select_')},
 				],
 				tableData1: [
 					{servicer:'tzx','online-state': '在线','now-in': '12','total-session':'111','total-message':'111',
@@ -275,8 +312,12 @@ var echarts = require('echarts');
 
 <style lang="LESS" scoped>
 	.select-box {
-	 margin-left: 900px;
+	 text-align: right;
+	 margin-bottom: 20px;
 
+	}
+	.el-select-dropdown {
+		display: inline-block;
 	}
 	.el-row {
 		margin-bottom: 30px;

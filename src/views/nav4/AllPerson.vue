@@ -32,9 +32,6 @@
 				label="手机号"
 				prop="phone"></el-table-column>
 			<el-table-column
-				label="类型"
-				prop="type"></el-table-column>
-			<el-table-column
 				label="角色"
 				prop="actor"></el-table-column>
 			<el-table-column
