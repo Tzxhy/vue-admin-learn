@@ -1,8 +1,8 @@
 <template>
 	<div style="margin-top: 30px;">
-		<div style="text-align:right;">
+		<div style="text-align:right;margin-top:20px;margin-bottom:20px;">
 			<el-input
-				v-model="serach"
+				v-model="search"
 				style="width: 300px;"
 				placeholder="搜索问题&知识点关键字"
 				icon="search"></el-input>
@@ -16,12 +16,22 @@
 						:key="item.key">
 						{{item.type}}
 					</el-dropdown-item>
-
 				</el-dropdown-menu>
 			</el-dropdown>
 		</div>
+		<div class="type" style="border:1px solid #eef1f6;text-align:center;">
+			<h4 style="background-color:#eef1f6;margin:0;line-height:30px;padding-left: 10px; ">分类</h4>
+			<ul style="height: 300px;">
+				<li
+				v-for="item of types" :item="item">{{item.type}}</li>
+			</ul>
+			<el-button
+				@click=""
+				type="primary">添加新的分类</el-button>
+		</div>
 		<el-tabs
-			type="border-card">
+			type="border-card"
+			style="float:right;width: 800px;">
 			<el-tab-pane
 				label="问题">
 				<el-table
@@ -42,6 +52,7 @@
 								<el-button
 									style="color:#000;"
 									type="text"
+									@click="handleEdit(scope.$index, scope.row)"
 									icon="edit"></el-button>
 								<el-button
 									style="color:#000;"
@@ -50,6 +61,23 @@
 							</template>
 						</el-table-column>
 					</el-table>
+				<el-dialog title="编辑" :visible.sync="dialogFormVisible">
+			  <el-form :model="editDate" label-width="100px">
+			    <el-form-item label="问题标题">
+			      <el-input v-model="editDate.title"></el-input>
+			    </el-form-item>
+			    <el-form-item label="归属知识点">
+			      <el-input v-model="editDate.belong"></el-input>
+			    </el-form-item>
+			    <el-form-item label="创建时间">
+			      <el-input v-model="editDate.createTime"></el-input>
+			    </el-form-item>
+			  </el-form>
+			  <div slot="footer" class="dialog-footer">
+			    <el-button @click="dialogFormVisible = false">取 消</el-button>
+			    <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+			  </div>
+			</el-dialog>
 			</el-tab-pane>
 			<el-tab-pane
 				label="知识点">
@@ -62,12 +90,12 @@
 						label="创建时间"
 						prop="createTime"></el-table-column>
 					<el-table-column
-						label="操作"
-						>
+						label="操作">
 							<template scope="scope">
 								<el-button
 									style="color:#000;"
 									type="text"
+									@click="handleEdit1(scope.$index, scope.row)"
 									icon="edit"></el-button>
 								<el-button
 									style="color:#000;"
@@ -76,6 +104,20 @@
 							</template>
 						</el-table-column>
 					</el-table>
+					<el-dialog title="编辑" :visible.sync="dialogFormVisible1">
+					  <el-form :model="editDate1" label-width="100px">
+					    <el-form-item label="问题标题">
+					      <el-input v-model="editDate1.title"></el-input>
+					    </el-form-item>
+					    <el-form-item label="创建时间">
+					      <el-input v-model="editDate1.createTime"></el-input>
+					    </el-form-item>
+					  </el-form>
+					  <div slot="footer" class="dialog-footer">
+					    <el-button @click="dialogFormVisible1 = false">取 消</el-button>
+					    <el-button type="primary" @click="dialogFormVisible1 = false">确 定</el-button>
+					  </div>
+					</el-dialog>
 			</el-tab-pane>
 		</el-tabs>
 	</div>
@@ -90,12 +132,16 @@ export default {
 			valueService: '',
 			valueType: '',
 			valueTime: '',
+			search: '',
+			dialogFormVisible: false,
+			dialogFormVisible1: false,
 			dropdownItems: [
 				{type: '添加问题',key:_.uniqueId('dropdown_')},
 				{type: '添加知识点',key:_.uniqueId('dropdown_')},
 
 			],
-			
+			editDate: {},
+			editDate1: {},
 			options1: [
 			{value: 'a',label: '康儿子', key: _.uniqueId('select_')},
 			{value: 'a',label: '谭大爷', key: _.uniqueId('select_')},
@@ -125,7 +171,8 @@ export default {
 				{title:'么么哒是什么意思?',createTime: '2017-07-30 22:38:18'},
 			
 
-			]
+			],
+			types: [{code:1, type:'全部问题&知识点'},{code:1, type:'未分类'},{code:1, type:'质量'},{code:1, type:'价格'}],
 
 
 		}
@@ -135,19 +182,29 @@ export default {
 
 		},
 		change(index){
-				// this.choose.fill(false);  不会触发更新
-				this.choose = [false, false, false, false]
-				this.choose[index] = true;
-			},
-			handleIconClick(ev){
-				console.log(this.searchValue);
-			}
+			// this.choose.fill(false);  不会触发更新
+			this.choose = [false, false, false, false]
+			this.choose[index] = true;
 		},
-		computed: {
-			
+		handleIconClick(ev){
+			console.log(this.searchValue);
 		},
+		handleEdit(index, data){
+			console.log(data);
+			this.editDate = Object.assign({},data);
+			this.dialogFormVisible = true;
+		},
+		handleEdit1(index, data){
+			console.log(data);
+			this.editDate1 = Object.assign({},data);
+			this.dialogFormVisible1 = true;
+		},
+	},
+	computed: {
 		
-	}
+	},
+	
+}
 
 </script>
 
@@ -177,7 +234,10 @@ export default {
 	.text-center {
 		text-align: center;
 	}
-
+	.type {
+		float: left;
+		width: 200px;
+	}
 	thead th {
 		.text-center;
 	}

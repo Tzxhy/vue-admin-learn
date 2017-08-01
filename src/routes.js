@@ -98,7 +98,7 @@ let routes = [
   iconCls: 'fa fa-bar-chart',
   children: [
   { path: '/intellence-lib', component: IntellenceLib, name: '知识库' },
-  { path: '/intellence-rela', component: IntellenceRela, name: '相似词库' },
+  // { path: '/intellence-rela', component: IntellenceRela, name: '相似词库' },
   { path: '/intellence-study', component: IntellenceStudy, name: '问题学习' },
   { path: '/intellence-total', component: IntellenceTotal, name: '问题统计' },
   ]

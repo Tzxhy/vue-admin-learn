@@ -14,7 +14,8 @@
 				v-model="input"
 				icon="search"
 				placeholder="请输入客服姓名/昵称/帐号/手机号"></el-input>
-			<el-button type="primary">新增客服</el-button>
+			<el-button type="primary"
+			@click="dialogFormVisible = true;">新增客服</el-button>
 		</div> 
 	<el-table
 		:data="tableData1"
@@ -52,6 +53,41 @@
 			layout="total, sizes, prev, pager, next, jumper"
 			:total="400">
 		</el-pagination>
+		<el-dialog title="新增客服" :visible.sync="dialogFormVisible">
+	  <el-form :model="newService" label-width="80px">
+	    <el-form-item label="帐号">
+	      <el-input v-model="newService.account"></el-input>
+	    </el-form-item>
+	    <el-form-item label="姓名">
+	      <el-input v-model="newService.name"></el-input>
+	    </el-form-item>
+	    <el-form-item label="昵称">
+	      <el-input v-model="newService.nickName"></el-input>
+	    </el-form-item>
+	    <el-form-item label="手机号">
+	      <el-input v-model="newService.phone"></el-input>
+	    </el-form-item>
+	    <el-form-item label="邮箱">
+	      <el-input v-model="newService.email"></el-input>
+	    </el-form-item>
+	    <el-form-item label="密码">
+	      <el-input v-model="newService.password"></el-input>
+	    </el-form-item>
+	    <el-form-item label="角色">
+	      <el-select v-model="newService.role" placeholder="请选择">
+	        <el-option label="管理员" value="1"></el-option>
+	        <el-option label="普通客服" value="2"></el-option>
+	      </el-select>
+	    </el-form-item>
+	    <el-form-item label="最大接待人数">
+	      <el-input v-model="newService.maxService"></el-input>
+	    </el-form-item>
+	  </el-form>
+	  <div slot="footer" class="dialog-footer">
+	    <el-button @click="dialogFormVisible = false">取 消</el-button>
+	    <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+	  </div>
+	</el-dialog>
 	</div>
 </template>
 
@@ -61,7 +97,7 @@
 export default {
 	data() {
 		return {
-			
+			input: '',
 			valueService:'',
 			options1: [
 			{value: 'a',label: '康儿子', key: _.uniqueId('select_')},
@@ -81,7 +117,18 @@ export default {
 			{nickName:'tzx',name: '333',account: '12',phone:'111',type:'111',actor:'普通客服',operate:''},
 			{nickName:'tzx',name: '333',account: '12',phone:'111',type:'111',actor:'普通客服',operate:''},
 			
-			]
+			],
+			dialogFormVisible: false,
+			newService: {
+				account: '',
+				name: '',
+				nickName: '',
+				phone: '',
+				email: '',
+				password: '',
+				role: '',
+				maxService: '10'
+			}
 
 
 		}
@@ -94,16 +141,25 @@ export default {
 				// this.choose.fill(false);  不会触发更新
 				this.choose = [false, false, false, false]
 				this.choose[index] = true;
-			},
-			handleIconClick(ev){
-				console.log(this.searchValue);
-			}
 		},
-		computed: {
-			
+		handleIconClick(ev){
+			console.log(this.searchValue);
 		},
+		currentPage(){
+
+		},
+		handleSizeChange(){
+
+		},
+		handleCurrentChange(){
+
+		},
+	},
+	computed: {
 		
-	}
+	},
+		
+}
 
 </script>
 
@@ -111,6 +167,8 @@ export default {
 <style lang="LESS" scoped>
 	.select-box	{
 		text-align: right;
+		margin-top: 20px;
+		margin-bottom: 20px;
 	}
 	.el-select-dropdown {
 		display: inline-block;
