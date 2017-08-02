@@ -19,6 +19,10 @@
 		  </el-form-item>
 
 		</el-form>
+	<el-button
+	style="margin-left: 180px;width: 500px; "
+	type="primary"
+	>保存</el-button>
 	</div>
 </template>
 

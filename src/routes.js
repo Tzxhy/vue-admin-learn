@@ -25,6 +25,7 @@ import IntellenceRela from './views/nav5/IntellenceRela.vue'
 import IntellenceStudy from './views/nav5/IntellenceStudy.vue'
 import IntellenceTotal from './views/nav5/IntellenceTotal.vue'
 import CopyInfo from './views/nav6/CopyInfo.vue'
+import WorkPane from './views/WorkPane.vue'
 
 
 let routes = [
@@ -45,6 +46,11 @@ let routes = [
   component: NotFound,
   name: '',
   hidden: true
+},
+{
+  path: '/work-pane',
+  component: WorkPane,
+  name: '工作台',
 },
 //{ path: '/main', component: Main },
 {
